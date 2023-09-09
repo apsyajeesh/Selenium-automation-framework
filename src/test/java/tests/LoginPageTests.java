@@ -1,6 +1,8 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,17 +36,19 @@ public class LoginPageTests extends TestBase {
 
     @Test
     public void testGoogle()  {
-        driver.get("https://www.google.com/finance");
-      WebElement element=driver.findElement(By.cssSelector("input.Ax4B8.ZAGvjd"));
-       // Duration timeout = Duration.ofSeconds(30);
-       // WebDriverWait wait = new WebDriverWait(driver, timeout);
-       //wait.until(ExpectedConditions.elementToBeClickable(element));
-        ((ChromeDriver) driver).executeScript("arguments[0].click();", element);
+        WebDriver driver = new ChromeDriver();
+        String testUrl = "https://www.google.com/finance";
+        driver.get(testUrl);
+        WebElement SearchTicker = driver.findElement(By.xpath("//*[@id=\"yDmH0d\"]/c-wiz[2]/div/div[3]/div[3]/div/div/div/div[1]/input[2]"));
+        SearchTicker.sendKeys("GOOGL");
+        SearchTicker.sendKeys(Keys.ENTER);
 
-       element.sendKeys("helo");
-       //// String price = driver.findElement(By.className("pFZ9G")).getText();
-      //  String  previousPrice=price.split("\\$")[1].trim();
-       // System.out.println("Previous Closing price:$"+previousPrice);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement previousClosingTickerElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("pFZ9G")));;
+        String previousClosingPrice = previousClosingTickerElement.getText().split("\\$")[1].trim();
+        System.out.println("Previous Closing Price: $" + previousClosingPrice);
+
+        driver.quit();
 
     }
 
