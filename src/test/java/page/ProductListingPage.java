@@ -9,11 +9,13 @@ import java.util.List;
 
 public class ProductListingPage {
 
-    public ProductListingPage() {
+    WebDriver driver;
 
+    public ProductListingPage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public void addItems(WebDriver driver, String[] itemsNeeded) {
+    public void addItems(String[] itemsNeeded) {
         System.out.println("Adding items to the cart");
         int j = 0;
         List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
@@ -30,5 +32,15 @@ public class ProductListingPage {
                 }
             }
         }
+    }
+
+    public void addItemsToCart() {
+        List<WebElement> add = driver.findElements(By.cssSelector("button[class='btn btn-info']"));
+        for (WebElement addCart : add) {
+            if (addCart.getText().equalsIgnoreCase("Add")) {
+                addCart.click();
+            }
+        }
+        driver.findElement(By.cssSelector("a[class='nav-link btn btn-primary']")).click();
     }
 }
