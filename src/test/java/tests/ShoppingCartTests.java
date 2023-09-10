@@ -29,32 +29,4 @@ public class ShoppingCartTests extends TestBase{
         cartPage.applyPromoCode();
         cartPage.placeOrder();
     }
-
-    @Test(groups = "p1")
-    public void checkoutTestWithOutPromoCode() throws InterruptedException {
-        driver.get("https://rahulshettyacademy.com/seleniumPractise/");
-        Thread.sleep(3000);
-        String[] itemsNeeded = {"Cucumber", "Brocolli", "Beetroot"};
-
-        ProductListingPage productListingPage = new ProductListingPage(driver);
-        productListingPage.addItems(itemsNeeded);
-
-        CartPage cartPage = new CartPage(driver);
-        cartPage.applyPromoCode();
-        cartPage.placeOrder();
-    }
-
-    @Test(groups = "p0")
-    public void checkoutTestWithOutPromoCode1() throws InterruptedException {
-        driver.get("https://rahulshettyacademy.com/seleniumPractise/");
-        Thread.sleep(3000);
-        String[] itemsNeeded = {"Cucumber", "Brocolli", "Beetroot"};
-
-        ProductListingPage productListingPage = new ProductListingPage(driver);
-        productListingPage.addItems(itemsNeeded);
-
-        CartPage cartPage = new CartPage(driver);
-        cartPage.applyPromoCode();
-        cartPage.placeOrder();
-    }
 }

@@ -48,8 +48,6 @@ public class LoginPageTests extends TestBase {
         String previousClosingPrice = previousClosingTickerElement.getText().split("\\$")[1].trim();
         System.out.println("Previous Closing Price: $" + previousClosingPrice);
 
-        driver.quit();
-
     }
 
 }
