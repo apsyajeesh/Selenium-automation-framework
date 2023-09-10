@@ -40,7 +40,7 @@ public class LoginPageTests extends TestBase {
         String testUrl = "https://www.google.com/finance";
         driver.get(testUrl);
         WebElement SearchTicker = driver.findElement(By.xpath("//*[@id=\"yDmH0d\"]/c-wiz[2]/div/div[3]/div[3]/div/div/div/div[1]/input[2]"));
-        //SearchTicker.sendKeys("GOOGL");
+        SearchTicker.sendKeys("GOOGL");
         SearchTicker.sendKeys(Keys.ENTER);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
