@@ -9,29 +9,55 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import page.LoginPage;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import page.learn.LoginPage;
+import utils.TestBase;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.time.Duration;
 
 public class LoginPageTests extends TestBase {
 
-    @DataProvider
-    private Object[][] userInfo() {
-        return new Object[][]{
-                {"rahulshettyaccademy", "Learning"},
-                {"sdsd@sdsds", "dada"},
-                {"3453534", "34534534"}
-        };
+    @DataProvider(name = "loginData")
+    public Object[][] loginDataProvider() {
+        // Read data from the XML file and return it as a 2D array
+        try {
+            File xmlFile = new File("test-data/login-creds.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(xmlFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("test");
+            Object[][] data = new Object[nodeList.getLength()][2];
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    data[i][0] = element.getElementsByTagName("username").item(0).getTextContent();
+                    data[i][1] = element.getElementsByTagName("password").item(0).getTextContent();
+                }
+            }
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    @Test(dataProvider = "userInfo", groups = "smoke")
+    @Test(dataProvider = "loginData", groups = "smoke")
     public void loginPractice(String username, String password) throws InterruptedException {
         driver.get("https://rahulshettyacademy.com/loginpagePractise/");
 
         Thread.sleep(2000);
         LoginPage loginPage = new LoginPage(driver, webDriverWait);
         loginPage.login(username, password);
-
     }
 
     @Test

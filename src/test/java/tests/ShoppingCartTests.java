@@ -1,20 +1,11 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import page.CartPage;
-import page.LoginPage;
-import page.ProductListingPage;
+import page.learn.CartPage;
+import page.learn.ProductListingPage;
 import org.testng.annotations.*;
+import utils.TestBase;
 
-import java.time.Duration;
-import java.util.List;
-
-public class ShoppingCartTests extends TestBase{
+public class ShoppingCartTests extends TestBase {
 
     @Test(groups = "p0")
     public void checkoutTestWithPromoCode() throws InterruptedException {

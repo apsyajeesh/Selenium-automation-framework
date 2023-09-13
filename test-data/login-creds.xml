@@ -1,0 +1,14 @@
+<testdata>
+    <test>
+        <username>rahulshettyaccademy</username>
+        <password>Learning</password>
+    </test>
+    <test>
+        <username>user2</username>
+        <password>password2</password>
+    </test>
+    <test>
+        <username>23423</username>
+        <password>2342</password>
+    </test>
+</testdata>
